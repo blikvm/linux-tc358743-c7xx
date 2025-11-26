@@ -1,0 +1,20 @@
+name: Test ARM64 Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04-arm64
+    steps:
+      - name: Check uname
+        run: uname -a
+
+      - name: Check CPU architecture
+        run: lscpu
+
+      - name: Test aarch64 binary
+        run: |
+          echo "int main(){return 0;}" > test.c
+          gcc test.c -o test
+          file test
